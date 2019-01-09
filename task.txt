@@ -1,0 +1,24 @@
+
+Instructions: 
+- Complete the tasks below in order listed. 
+- Use React
+- Don't use <table> tag
+- Use connectors array in connectors.js file to build the views
+- Include build steps with your submission
+
+Task 1. Write the code along with the setup to replicate the following design
+	https://gyazo.com/11d3127efe4db67f71739f98c142dfff
+
+Task 2. Implement the following Hover effect 
+        https://gyazo.com/1aa28255e4afe13377fa97a21a55a1c0
+	
+Task 3. Make the UX responsive
+	https://gyazo.com/08856a7e3b581543fd069833c27364ea
+
+Task 4. Add Paginator to the view which looks like this: 
+	https://gyazo.com/3dc5867ee8ba8609a76ec66d840bc9ce
+
+
+
+
+
