@@ -1,4 +1,4 @@
-export default [
+const connectors = [
     {
         "id": 963751069051,
         "name": "55A2-1610",
@@ -55,3 +55,10 @@ export default [
         "gender": "Male"
     }
 ];
+
+const delay = timeout =>
+  new Promise(resolve => setTimeout(() => resolve(connectors), timeout))
+
+export const fetchConnectors = () => (
+  delay(500)
+)

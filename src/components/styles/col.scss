@@ -1,0 +1,103 @@
+$column-count: 24;
+
+@mixin media($width, $size) {
+  @media (#{$width}: #{$size}) {
+    @content;
+  }
+}
+
+@mixin mediaWithLoop($width, $size, $type) {
+  @if $type == xs {
+    $index: 1;
+  
+    @while $index <= $column-count {
+      .col-#{$type}-#{$index} {
+        @content;
+      }
+  
+      $index: $index + 1;
+    }
+    
+    @content;
+
+  } @else {
+    @include media($width, $size) {
+      $index: 1;
+  
+      @while $index <= $column-count {
+        .col-#{$type}-#{$index} {
+          @content;
+        }
+  
+        $index: $index + 1;
+      }
+      
+      @content;
+    }
+  }
+}
+
+@mixin col-all() {
+  %col {
+    position: relative;
+    min-height: 1px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  $index: 1;
+  
+  @while $index <= $column-count {
+    .col-#{$index} {
+      @extend %col;
+    }
+    @each $type, $size in (xs: 576px, sm: 576px, md: 768px, lg: 992px, xl: 1200, xxl: 1600) {
+      .col-#{$type}-#{$index} {
+        @extend %col;
+        
+        & {
+          @include mediaWithLoop(min-width, $size, $type) {
+            float: left;
+            flex: 0 0 auto;
+          }
+        }
+      }
+    }
+  
+    $index: $index + 1;
+  }
+  
+  @each $type, $size in (xs: 576px, sm: 576px, md: 768px, lg: 992px, xl: 1200, xxl: 1600) {
+    @if $type == xs {
+      $index: 1;
+
+      @while $index <= $column-count {
+        .col-#{$type}-#{$index} {
+          display: block;
+          box-sizing: border-box;
+          width: #{100% / ($column-count / $index)};
+        }
+  
+        $index: $index + 1;
+      }
+    } @else {
+      @include media(min-width, $size) {
+        $index: 1;
+
+        @while $index <= $column-count {
+          .col-#{$type}-#{$index} {
+            display: block;
+            box-sizing: border-box;
+            width: #{100% / ($column-count / $index)};
+          }
+    
+          $index: $index + 1;
+        }
+      }
+    }
+  }
+}
+
+.row {
+  @include col-all();
+}

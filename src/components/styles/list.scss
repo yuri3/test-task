@@ -1,0 +1,15 @@
+.list {
+  padding: 24px;
+  width: 100%;
+  overflow: auto;
+
+  .list-item {
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-weight: 500;
+  }
+}
