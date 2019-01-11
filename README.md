@@ -8,3 +8,4 @@ npm start
 ### The stack includes:
 
 #### --React
+#### --TypeScript
