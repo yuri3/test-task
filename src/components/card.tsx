@@ -1,11 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import List from './List'
-import './styles/card.scss'
+import React, { ReactNode, ReactElement } from 'react';
+import PropTypes from 'prop-types';
+import List from './list';
+import './styles/card.scss';
+
+type InfoItem = {
+  id: string;
+  name: string;
+  count: string | number;
+}
+
+type Props = {
+  hoverable: boolean;
+  title: string;
+  cover: ReactElement<any>;
+  infoList: InfoItem[];
+  actions: ReactElement<any>[];
+  children?: ReactNode;
+}
 
 const Card = ({
-  hoverable, title, cover, infoList, actions, 
-}) => (
+  hoverable, title, cover, infoList, actions, children,
+}: Props): ReactElement<any> => (
   <div className={`card ${hoverable ? 'card-hoverable' : ''}`}>
     <div className="card-title">{title}</div>
     {
@@ -18,6 +33,7 @@ const Card = ({
         </div>
       )
     }
+    {children}
     {
       actions && (
         <div className="card-actions">
@@ -30,13 +46,13 @@ const Card = ({
       )
     }
   </div>
-)
+);
 
 Card.defaultProps = {
   hoverable: false,
   title: '',
   infoList: [],
-}
+};
 
 Card.propTypes = {
   hoverable: PropTypes.bool,
@@ -44,6 +60,7 @@ Card.propTypes = {
   infoList: PropTypes.array,
   cover: PropTypes.element,
   actions: PropTypes.array,
-}
+  children: PropTypes.element,
+};
 
-export default Card
+export default Card;

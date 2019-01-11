@@ -1,8 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import './styles/list.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Card from './card';
+import './styles/list.scss';
 
-const List = ({ list }) => (
+type InfoItem = Card['props']['infoList'];
+
+type Props = {
+  list: InfoItem[];
+}
+
+const List = ({ list }: Props): React.ReactElement<any> => (
   <div className="list">
     {
       list.map(({ id, name, count }) => (
@@ -13,14 +20,14 @@ const List = ({ list }) => (
       ))
     }
   </div>
-)
+);
 
 List.defaultProps = {
   list: [],
-}
+};
 
 List.propTypes = {
   list: PropTypes.array,
-}
+};
 
-export default List
+export default List;

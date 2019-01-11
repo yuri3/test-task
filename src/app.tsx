@@ -1,29 +1,56 @@
 import React, { Component } from 'react';
-import Row from './components/Row';
-import Col from './components/Col';
-import Card from './components/Card';
+import Row from './components/row';
+import Col from './components/col';
+import Card from './components/card';
 import { fetchConnectors } from './connectors';
 import './app.scss';
 
 const gutter = 24;
 
-class App extends Component {
-  state = {
-    isFetching: false,
-    connectors: [],
-  }
-  
+type Props = {};
+
+type State = typeof initialState;
+
+type Connector = {
+  id: string;
+  name: string;
+  jpeg_file_url: string;
+  pressure_rating: string;
+  voltage_rating: number;
+  wiregauge: number;
+  contacts: string;
+}
+
+type RowStyle = {
+  paddingTop: string | number,
+}
+
+type ColStyle = {
+  marginBottom: string | number;
+  paddingLeft?: string | number;
+  paddingRight?: string | number;
+  // [others: string]: string | number;
+}
+
+const initialState = Object.freeze({
+  isFetching: false,
+  connectors: [] as Connector[],
+});
+
+class App extends Component<Props, State> {
+  readonly state = initialState
+
   componentDidMount() {
     this.setState({ isFetching: true })
     fetchConnectors().then((connectors) => {
       this.setState({ isFetching: false, connectors })
     })
   }
-  
+
   render() {
-    const rowStyle = { paddingTop: '12px' };
-    let colStyle = { marginBottom: `${gutter}px` };
-  
+    const rowStyle: RowStyle = { paddingTop: '12px' };
+    let colStyle: ColStyle = { marginBottom: gutter };
+
     if (gutter) {
       colStyle = {
         ...colStyle,
@@ -31,9 +58,9 @@ class App extends Component {
         paddingRight: gutter / 2,
       }
     }
-    
-    const { isFetching, connectors } = this.state
-    
+
+    const { isFetching, connectors } = this.state;
+
     if (isFetching) {
       return <div className="app" style={{ textAlign: 'center' }}>Loading...</div>
     }
